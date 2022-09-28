@@ -1,0 +1,67 @@
+{% extends "sections/base.html" %}
+
+{% block title %}  ::quotes:: {% endblock %} 
+
+{% block page_ref %} 
+    <a class="nav-link text-white" href="/myaccount/{{request.session.user.id}}"> Edit My Account </a>
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-5 offset-lg-1 col-sm-10 offset-sm-2">
+            <h4 class="mb-4">Quotes</h4>
+            {% for quote in quotes %}
+
+            <div class="card text-black my-4" style="background-color:ghostwhite; border-radius: 15px;">
+                <div class="card-body my-1 mx-2">
+                    <blockquote class="blockquote">
+                        <p>
+                            {{quote.quote}}
+                        </p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer mt-1">
+                        {{quote.author}}
+                    </figcaption>
+                    <p class="mt-2">Posted by: <a href="/user/{{quote.posted_by.id}}">{{quote.posted_by.first_name}} {{quote.posted_by.last_name}}</a> </p>
+                    <p>{{likes.user.id}}</p>
+                    <div class="row">
+                        <div class="offset-2 col-5 align-items-center">
+                            <p class="mt-3"> {{quote.likes}} People like this </p>
+                        </div>
+                        <div class="col-5"> 
+                            <a href="/update/{{quote.id}}" class="btn btn-primary" role="button">Like <i class="far fa-thumbs-up"></i></a>
+                        </div>
+                    </div>
+                    {% if quote.posted_by.id == request.session.user.id %}
+                    <a href="/delete/{{quote.id}}">  Delete  </a>
+                    {% endif %}
+                </div>
+            </div>                
+            {% endfor %}
+        </div>
+
+        <div class="col-lg-5 offset-lg-1 col-sm-10 offset-sm-2">
+            <div id="quote">   
+                <h4 class="mb-4">Add a quote!</h4>
+                <form action="/quotes" method="post"> <!--Sign In form-->
+                    {% csrf_token %}
+                    <div class="col-md-8 form-group">
+                        <label for="author_id" class="form_label">Author</label>
+                        <input type="text" class="form-control" required autocomplete="off" id="author_id" name="author">
+                    </div>
+                    <div class="col-md-8 form-group">
+                        <label for="quote_id" class="form_label">Quote</label>
+                        <textarea id="quote_id" class="form-control" name="quote" rows=4></textarea>
+                    </div>
+                    <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
+                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>    
+</div>    
+{% endblock %}
+
+

@@ -1,0 +1,43 @@
+{% if request.session.user %}
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto my-0 text-white align-items-center">
+                <li class="mr-5">
+                    Quotes Media
+                </li>
+                <li class="mx-5">
+                    Hello, {{request.session.user.name}}
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center">
+                {% block page_ref %}{% endblock %}
+                <a href='/logout' class="btn btn-outline-success" role="button">Log Out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% else %}
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto my-0 text-white align-items-center">
+                <li class="mr-5">
+                    Quotes Media
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center">
+                <a href='/' class="btn btn-outline-success" role="button">Register / Log In</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+{% endif %}

@@ -1,0 +1,31 @@
+{% extends "sections/base.html" %}
+
+{% block title %}  ::quotes:: {% endblock %} 
+
+{% block page_ref %}
+<a class="nav-link text-white" href="/quotes"> Go back </a>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-5 offset-lg-1 col-sm-10 offset-sm-2">
+            <h4 class="mb-4">{{name}} Quotes</h4>
+            {% for quote in user_quotes %}
+            <div class="card text-black my-4" style="background-color:ghostwhite; border-radius: 15px;">
+                <div class="card-body my-1 mx-3">
+                    <blockquote class="blockquote">
+                        <p>
+                            {{quote.quote}}
+                        </p>
+                    </blockquote>
+                    <figcaption class="blockquote-footer mt-2">
+                        {{quote.author}}
+                    </figcaption>
+                </div>
+            </div>                
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

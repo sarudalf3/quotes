@@ -1,0 +1,35 @@
+{% extends "sections/base.html" %}
+
+{% block title %}  ::Edit Info:: {% endblock %} 
+
+{% block page_ref %} 
+    <a class="nav-link text-white" href="/quotes"> Go back </a>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row my-4">
+        <div class="col-lg-5 offset-lg-1 col-sm-10 offset-sm-2">
+            <h3 class="mb-4">Edit my account</h3>
+            <form action="/myaccount/{{request.session.user.id}}" method="post"> <!--Sign In form-->
+                {% csrf_token %}
+                <div class="col-md-8 form-group mb-2">
+                    <label for="fname_id" class="form_label">First Name</label>
+                    <input type="text" class="form-control" value="{{user.first_name}}" id="fname_id" name="fname">
+                </div>
+                <div class="col-md-8 form-group mb-2">
+                    <label for="lname_id" class="form_label">Last Name</label>
+                    <input type="text" class="form-control" value="{{user.last_name}}" id="lname_id" name="lname">
+                </div>
+                <div class="col-md-8 form-group mb-2">
+                    <label for="email_id" class="form_label">Email</label>
+                    <input type="email" class="form-control" required  id="email_id" name="email" value="{{user.email}}">
+                </div>
+                <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
+                <button type="submit" class="btn btn-primary mt-3 mb-5">Update</button>
+            </form>
+        </div>
+    </div>
+</div>    
+{% endblock %}
+
